@@ -9,7 +9,7 @@
                 data-require="splunkjs/mvc/searchmanager"
                 data-options='{
                   "app": "htmlcontent-example",
-                  "search":  "index=_internal |stats count(sourcetype)",
+                  "search":  "index=_internal |stats count",
                   "earliest_time": "-7d",
                   "preview": true
                 }'/>
