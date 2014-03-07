@@ -1,0 +1,26 @@
+<dashboard script="autodiscover.js">
+<row>
+    <html>
+      <h2>Show result from following search as HTML content>  index=_internal |stats count</h2>
+      <hr />
+          <font size="3" color="red">
+      <div id="htmlcontent-search"
+            class="splunk-manager splunk-searchmanager"
+                data-require="splunkjs/mvc/searchmanager"
+                data-options='{
+                  "app": "htmlcontent-example",
+                  "search":  "index=_internal |stats count(sourcetype)",
+                  "earliest_time": "-7d",
+                  "preview": true
+                }'/>
+      <div id="htmlcontent"
+                class="splunk-view"
+                data-require="app/htmlcontent-example/components/htmlcontent/htmlcontent"
+                data-options='{
+                        "managerid": "htmlcontent-search"
+                }'/>
+        </font>
+        <hr />
+    </html>
+</row>
+</dashboard>
