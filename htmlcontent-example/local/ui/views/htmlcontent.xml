@@ -3,7 +3,6 @@
     <html>
       <h2>Show result from following search as HTML content>  index=_internal |stats count</h2>
       <hr />
-          <font size="3" color="red">
       <div id="htmlcontent-search"
             class="splunk-manager splunk-searchmanager"
                 data-require="splunkjs/mvc/searchmanager"
