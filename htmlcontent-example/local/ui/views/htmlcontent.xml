@@ -3,23 +3,25 @@
     <html>
       <h2>Show result from following search as HTML content>  index=_internal |stats count</h2>
       <hr />
-      <div id="htmlcontent-search"
-            class="splunk-manager splunk-searchmanager"
-                data-require="splunkjs/mvc/searchmanager"
-                data-options='{
-                  "app": "htmlcontent-example",
-                  "search":  "index=_internal |stats count",
-                  "earliest_time": "-7d",
-                  "preview": true
-                }'/>
-      <div id="htmlcontent"
-                class="splunk-view"
-                data-require="app/htmlcontent-example/components/htmlcontent/htmlcontent"
-                data-options='{
-                        "managerid": "htmlcontent-search"
-                }'/>
-        </font>
-        <hr />
+      <div id="htmlcontent-search" 
+	    class="splunk-manager splunk-searchmanager" 
+		data-require="splunkjs/mvc/searchmanager" 
+		data-options='{                         
+		  "app": "htmlcontent-example",                      
+		  "search":  "index=_internal |stats count",
+		  "earliest_time": "-7d",
+		  "preview": true
+		}'/>
+      <div id="htmlcontent" 
+		class="splunk-view" 
+		data-require="app/htmlcontent-example/components/htmlcontent/htmlcontent" 
+		data-options='{
+			"managerid": "htmlcontent-search",
+            "text_before": "this is plain html content, total count: ",
+            "text_after": "&lt;br&gt; natively implemented in Splunk6 simple XML"
+		}'/>
+	</font>
+	<hr />
     </html>
 </row>
 </dashboard>
