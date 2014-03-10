@@ -32,11 +32,12 @@ define(function(require, exports, module) {
 
         updateView: function(viz, data) {
             // console.log("The data object: ", data);
-            var myResult = data[0];
-            // place your transformation (plain HTML) here:
-            var customContent = '<font size="4" color="black">This is plain HTML text, showing your Splunk search result: <br /><br />';
-            var customContent = customContent + '<font size="4" color="red">total count: ' + myResult;
+            var text_before = this.settings.get('text_before');
+            var text_after = this.settings.get('text_after');
+            var searchResult = data[0];
+            var customContent = text_before + searchResult + text_after;
             this.$el.html(customContent);
+
         }
     });
     return HTMLContent;
