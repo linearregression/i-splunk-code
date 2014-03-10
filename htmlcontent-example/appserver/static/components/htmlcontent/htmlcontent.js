@@ -31,10 +31,12 @@ define(function(require, exports, module) {
         },
 
         updateView: function(viz, data) {
-            var valueField = this.settings.get('valueField');
             // console.log("The data object: ", data);
-            var myResults = data[0];
-            this.$el.html(myResults);
+            var myResult = data[0];
+            // place your transformation (plain HTML) here:
+            var customContent = '<font size="4" color="black">This is plain HTML text, showing your Splunk search result: <br /><br />';
+            var customContent = customContent + '<font size="4" color="red">total count: ' + myResult;
+            this.$el.html(customContent);
         }
     });
     return HTMLContent;
