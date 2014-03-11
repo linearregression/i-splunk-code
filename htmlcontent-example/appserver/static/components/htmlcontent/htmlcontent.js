@@ -33,11 +33,12 @@ define(function(require, exports, module) {
         updateView: function(viz, data) {
             // console.log("The data object: ", data);
             var text_before = this.settings.get('text_before');
+            text_before = (typeof text_before === 'undefined') ? "" : text_before;
             var text_after = this.settings.get('text_after');
+            text_after = (typeof text_after === 'undefined') ? "" : text_after;
             var searchResult = data[0];
             var customContent = text_before + searchResult + text_after;
             this.$el.html(customContent);
-
         }
     });
     return HTMLContent;
