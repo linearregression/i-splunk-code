@@ -1,0 +1,31 @@
+<form script="autodiscover.js, sankey-native.js">
+  <label>clickstream test by mathu</label>
+  <description/>
+  <row>
+
+    <html>
+      <h2>Sankey Clickstream Chart</h2>
+      <div id="sankeySearch" class="splunk-manager" 
+	    data-require="splunkjs/mvc/searchmanager" 
+		data-options='{
+		  "search": "index=test  | streamstats current=f last(page) as n1_page by client_id  |  streamstats count(n1_page) as c1 by page n1_page | streamstats current=f last(n1_page) as n2_page by client_id | streamstats count(n2_page) as c2 by n2_page n1_page| table page n1_page c1 n2_page c2  | search n1_page=*Einstiegsseite* | sort -c1 -c2",
+		  "earliest_time": "-60m",
+		  "status_buckets": 0,
+		  "cancelOnUnload": true,
+		  "auto_cancel": 90,
+		  "preview": true
+		}'/>
+      <div id="sankeyChart" class="splunk-view" 
+	    data-require="app/webstats2/components/sankeychart/sankey3path" 
+		data-options='{
+		  "managerid": "sankeySearch",
+		  "prev_pageField": "page",
+		  "pageField": "n1_page",
+		  "next_pageField": "n2_page",
+		  "count1Field": "c1",
+		  "count2Field": "c2",
+		  "height": 300
+		}'/>
+    </html>
+  </row>
+</form>
