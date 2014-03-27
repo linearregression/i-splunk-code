@@ -20,7 +20,6 @@
 			"text_before": "this is plain html content, total count: ",
 			"text_after": "&lt;br&gt; natively implemented in Splunk6 simple XML"
 		}'/>
-	</font>
 	<hr />
     </html>
 </row>
