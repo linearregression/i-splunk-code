@@ -1,0 +1,35 @@
+[app/ui]
+version = 6.0.2
+modtime = 1395896999.806508000
+
+[app/launcher]
+version = 6.0.2
+modtime = 1395896999.808773000
+
+[views/htmlcontent]
+owner = admin
+version = 6.0.2
+modtime = 1396296431.072763000
+
+[nav/default]
+version = 6.0.2
+modtime = 1396364773.795251000
+
+[views/paneltoggle]
+owner = admin
+version = 6.0.2
+modtime = 1396364749.241666000
+
+[views/imagepanel]
+access = read : [ * ], write : [ admin, power ]
+export = none
+owner = admin
+version = 6.0.2
+modtime = 1396382796.057721000
+
+[views/imagepanel_clone]
+access = read : [ * ], write : [ admin, power ]
+export = none
+owner = admin
+version = 6.0.2
+modtime = 1396378986.221027000
