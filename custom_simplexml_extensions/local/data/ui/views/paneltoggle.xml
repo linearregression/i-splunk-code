@@ -1,6 +1,6 @@
 <dashboard script="autodiscover.js">
   <label>paneltoggle</label>
-  <description/>
+  <description>checkout: https://github.com/i-splunk/i-splunk-code</description>
 
   <row grouping="2">
     <html>

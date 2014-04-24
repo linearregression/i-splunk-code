@@ -9,27 +9,24 @@ modtime = 1395896999.808773000
 [views/htmlcontent]
 owner = admin
 version = 6.0.2
-modtime = 1396296431.072763000
+modtime = 1398363714.787072000
 
 [nav/default]
 version = 6.0.2
-modtime = 1396364773.795251000
+modtime = 1398363106.474713000
 
 [views/paneltoggle]
 owner = admin
 version = 6.0.2
-modtime = 1396364749.241666000
+modtime = 1398363602.916941000
 
 [views/imagepanel]
 access = read : [ * ], write : [ admin, power ]
 export = none
 owner = admin
 version = 6.0.2
-modtime = 1396382796.057721000
+modtime = 1398363657.347094000
 
-[views/imagepanel_clone]
-access = read : [ * ], write : [ admin, power ]
-export = none
-owner = admin
+[views/2nodesankey]
 version = 6.0.2
-modtime = 1396378986.221027000
+modtime = 1398363816.797237000

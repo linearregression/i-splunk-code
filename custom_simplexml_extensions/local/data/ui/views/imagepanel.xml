@@ -1,14 +1,16 @@
 <dashboard script="jquery.bxslider.js, autodiscover.js" stylesheet="jquery.bxslider.css">
   <label>imagepanel</label>
-  <description>A panel that shows random images based on a list of image filepaths</description>
+  <description>checkout: https://github.com/i-splunk/i-splunk-code</description>
   <row>
-    <table>
-      <title>image names in folder custom_pics</title>
-      <searchString>| script python custompics custom_pics </searchString>
-      <option name="wrap">true</option>
-      <option name="rowNumbers">false</option>
-      <option name="dataOverlayMode">none</option>
-    </table>
+    <html>
+      This example uses <b>bxslider</b> to show images in a Splunk panel. See <a href="http://bxslider.com">http://bxslider.com</a> for more information about bxslider
+      <br /><br />
+      Use HTML image links to populate the slider. <br /><br />
+      In this example, the images are placed in the static directory of the app in a folder called custom_pics.<br />
+      A custom script is used to generate the appropriate Splunk URLs for the images. The custom script is just an example. Use your own image URLs, i.e. to show twitter or facebook images
+    </html>
+  </row>
+  <row>
     <html>
       <div id="imagepanel-search" 
 	    class="splunk-manager splunk-searchmanager" 
@@ -29,5 +31,12 @@
           "pagerField": true
     }'/>
     </html>
+    <table>
+      <title>image names in folder custom_pics</title>
+      <searchString>| script python custompics custom_pics </searchString>
+      <option name="wrap">true</option>
+      <option name="rowNumbers">false</option>
+      <option name="dataOverlayMode">none</option>
+    </table>
   </row>
 </dashboard>

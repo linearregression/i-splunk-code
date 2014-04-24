@@ -1,0 +1,41 @@
+<dashboard script="autodiscover.js, sankey-native.js">
+  <label>2-node sankey example</label>
+  <description>checkout: https://github.com/i-splunk/i-splunk-code</description>
+
+<row>
+    <table>
+      <title>splunk users and roles</title>
+      <searchString>|rest splunk_server=local /servicesNS/-/-/authentication/users count=0   | stats count(roles) as count by realname roles | search roles=admin</searchString>
+      <earliestTime>-60m</earliestTime>
+      <latestTime>now</latestTime>
+      <option name="wrap">true</option>
+      <option name="rowNumbers">false</option>
+      <option name="dataOverlayMode">none</option>
+      <option name="drilldown">cell</option>
+    </table>
+    <html>
+      <h2>user/role relation of splunk permissions</h2>
+      <hr />
+      <div id="2nodesankey-search" 
+	    class="splunk-manager splunk-searchmanager" 
+		data-require="splunkjs/mvc/searchmanager" 
+		data-options='{                         
+		  "app": "demoapp",                      
+		  "search":  "|rest splunk_server=local /servicesNS/-/-/authentication/users count=0 | stats count(roles) as count by realname roles | search roles=admin",
+          "earliest_time": "-60m",
+          "latest_time": "now"
+		}'/>
+      <div id="2nodesankey" 
+		class="splunk-view" 
+		data-require="app/demoapp/components/sankeychart/2nodesankey" 
+		data-options='{
+	      "managerid": "2nodesankey-search",
+		  "currentField": "realname",
+          "nextField": "roles",
+		  "countField": "count",
+		  "height": 500
+		}'/>
+	<hr />
+    </html>
+</row>
+</dashboard>
