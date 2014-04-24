@@ -1,0 +1,36 @@
+<dashboard script="autodiscover.js">
+  <description>checkout: https://github.com/i-splunk/i-splunk-code</description>
+<row>
+    <html>
+      <h2>
+        The htmlcontent panel injects searchresults into static html content<br />
+        <br />
+        Use parameters &quot;text_before&quot; and &quot;text_after&quot; for the static HTML parts<br />
+        Use a search that returns a single value
+        <br />
+      </h2>
+    </html>
+    <html>
+      <h2>Show result from following search as HTML content>  index=_internal |stats count</h2>
+      <hr />
+      <div id="htmlcontent-search" 
+	    class="splunk-manager splunk-searchmanager" 
+		data-require="splunkjs/mvc/searchmanager" 
+		data-options='{                         
+			"app": "custom_simplexml_extensions",                      
+			"search":  "index=_internal |stats count",
+			"earliest_time": "-7d",
+			"preview": true
+		}'/>
+      <div id="htmlcontent" 
+		class="splunk-view" 
+		data-require="app/custom_simplexml_extensions/components/htmlcontent/htmlcontent" 
+		data-options='{
+			"managerid": "htmlcontent-search",
+			"text_before": "this is plain html content, the total count is: ",
+			"text_after": "&lt;br&gt; natively implemented in Splunk6 simple XML"
+		}'/>
+	<hr />
+    </html>
+</row>
+</dashboard>
