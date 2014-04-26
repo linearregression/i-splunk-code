@@ -1,4 +1,4 @@
-//  Sankey 3 node chart 
+//  Sankey 3 node chart
 
 /*   Copyright 2014 by mathias herzog, <mathu at gmx dot ch>
 
@@ -24,19 +24,19 @@
  --- available settings ---
  - pageField:       the current page
  - prev_pageField:  previous page
- - next_pageField:  next page 
+ - next_pageField:  next page
  - count1Field:     the count of path page-to-n1_page
  - count2Field:     the count of path n1_page-to-n2_page
  - height:          the height of the panel
 
  --- expected data format ---
- a splunk search like this: source=foo | 
-                            streamstats current=f last(page) as n1_page by client_id  |  
-                            streamstats count(n1_page) as c1 by page n1_page | 
-                            streamstats current=f last(n1_page) as n2_page by client_id | 
+ a splunk search like this: source=foo |
+                            streamstats current=f last(page) as n1_page by client_id  |
+                            streamstats count(n1_page) as c1 by page n1_page |
+                            streamstats current=f last(n1_page) as n2_page by client_id |
                             streamstats count(n2_page) as c2 by n2_page n1_page |
-                            search n1_page=<filter page that will be in the middle of the sankey nodes> 
- where: 
+                            search n1_page=<filter page that will be in the middle of the sankey nodes>
+ where:
   "page"     will refer to prev_pageField
   "n1_page"  will refer to pageField
   "n2_page"  will refer to next_pageField
@@ -54,27 +54,27 @@ define(function(require, exports, module) {
 
   // sankey diagramms don't like it when source and target pages have the same name
   // so we append a string to every nX_page value
-  // this string will be replaced later on in the sankey node- and link titles  
-  delim = "_n-" 
+  // this string will be replaced later on in the sankey node- and link titles
+  delim = "_n-"
 
     // create map out of a collection
-    // concat the append-string to every extracted item of the collection 
+    // concat the append-string to every extracted item of the collection
     function pluck(arr, key, append) {
-    return $.map(arr, function(e) { 
+    return $.map(arr, function(e) {
       try {
         s = e[key].concat(append);
-        return s; 
+        return s;
       } catch (f) {
         return "";
       }
-    }) 
+    })
   }
 
   var SankeyView = SimpleSplunkView.extend({
     className: "splunk-toolkit-sankey-chart",
     options: {
-      managerid: null,   
-      data: "preview", 
+      managerid: null,
+      data: "preview",
       pageField: null,
       count1Field: 'count',
       count2Field: 'count',
@@ -89,7 +89,7 @@ define(function(require, exports, module) {
         formatName: _.identity,
         formatTitle: function(d) {
           return (d.source.name + ' -> ' + d.target.name +
-              ': ' + d.value); 
+              ': ' + d.value);
         }
       });
       SimpleSplunkView.prototype.initialize.apply(this, arguments);
@@ -122,7 +122,7 @@ define(function(require, exports, module) {
       var availableHeight = parseInt(this.settings.get("height") || this.$el.height());
       var width = availableWidth - margin.left - margin.right;
       var height = availableHeight - margin.top - margin.bottom;
-      
+
       this.$el.html("");
 
       var svg = d3.select(this.el)
@@ -150,7 +150,7 @@ define(function(require, exports, module) {
       var collection = data;
       var n1_append = "_n-1";
       var n2_append = "_n-2";
-      
+
       // create a list of all uniq nodes for the sankey diagram
       var nodeList = _.uniq(_.pluck(collection, prev_pageField)
         .concat(pluck(collection, pageField, n1_append))
@@ -178,20 +178,20 @@ define(function(require, exports, module) {
 
         try {
           // create page to n1_page relation
-          pp = collection[i][pageField].concat(n1_append);  
+          pp = collection[i][pageField].concat(n1_append);
           p_pp_path = p.concat(pp);
           var s = p_pp_paths.indexOf(p_pp_path);
-          if (s  < 0) { 
+          if (s  < 0) {
             p_pp_paths.push(p_pp_path);
             links.push({ 'source': parseInt(nodeList.indexOf(p)), 'target': parseInt(nodeList.indexOf(pp)), 'value':  c1})
           }
 
           // create n1_page to n2_page relation
           try {
-            ppp = collection[i]['n2_page'].concat(n2_append); 
+            ppp = collection[i][next_pageField].concat(n2_append);
             pp_ppp_path = pp.concat(ppp);
             var s = pp_ppp_paths.indexOf(pp_ppp_path);
-            if (s  < 0) { 
+            if (s  < 0) {
               pp_ppp_paths.push(pp_ppp_path);
               links.push({ 'source': parseInt(nodeList.indexOf(pp)), 'target': parseInt(nodeList.indexOf(ppp)), 'value':  c2})
             }
@@ -201,9 +201,9 @@ define(function(require, exports, module) {
         } catch (e) {
         }
       }
-      
-      var nodes = _.map(nodeList, function(node) { return { name: node } }); 
-      var sankeychart = {'nodes': nodes, 'links': links}  
+
+      var nodes = _.map(nodeList, function(node) { return { name: node } });
+      var sankeychart = {'nodes': nodes, 'links': links}
 
       return sankeychart; // this is passed into updateView as 'data'
     },
@@ -215,7 +215,7 @@ define(function(require, exports, module) {
       svg1.empty();
 
       var availableWidth = parseInt(this.$el.width());
-      var availableHeight = parseInt(this.$el.height()); 
+      var availableHeight = parseInt(this.$el.height());
       var width = availableWidth - viz.margin.left - viz.margin.right;
       var height = availableHeight - viz.margin.top - viz.margin.bottom;
 
@@ -260,7 +260,7 @@ define(function(require, exports, module) {
       .enter().append("a")
       .attr("class", "node")
       // add hyperlink for drilldown
-      .attr("xlink:href", function(d) { return uri +"?form.page="+  d.name.split(delim)[0]; })
+      .attr("xlink:href", function(d) { return uri +"?form.node_token="+  d.name.split(delim)[0]; })
       .attr("transform", function(d)  { return "translate(" + d.x + "," + d.y + ")"; })
       .call(d3.behavior.drag()
           .origin(function(d) { return d; })
@@ -270,8 +270,8 @@ define(function(require, exports, module) {
       node.append("rect")
       .attr("height", function(d) { return d.dy; })
       .attr("width", sankey.nodeWidth())
-      .style("fill", function(d) { 
-        return d.color = color(d.name.replace(/ .*/, "")); 
+      .style("fill", function(d) {
+        return d.color = color(d.name.replace(/ .*/, ""));
       })
       .style("stroke", function(d) { return d3.rgb(d.color).darker(2); })
       .append("title")
