@@ -1,0 +1,63 @@
+<form script="autodiscover.js, sankey-native.js">
+  <label>3-node-sankey</label>
+  <description>checkout: https://github.com/i-splunk/i-splunk-code</description>
+  <fieldset autoRun="true" submitButton="false">
+    <input type="dropdown" token="node_token" searchWhenChanged="true">
+      <label>select the node that appears in the middle</label>
+      <default>*</default>
+      <choice value="*">All</choice>
+      <populatingSearch fieldForValue="n1_node" fieldForLabel="n1_node">
+        <![CDATA[|inputlookup 3-node-sankey.csv | fields node n1_node n2_node ]]>
+      </populatingSearch>
+    </input>
+  </fieldset>
+  <row>
+    <html>
+      <br />
+      This is a d3.js sankey implementation for 3-node relationships. See <a href="http://d3js.org">http://d3js.org</a> for more information about sankey implementation
+      <br />
+      <br />
+      This kind of diagram can be useful to show clickstream relationsips for web statistics. 
+      &quot;n1_node&quot; will then be the current page whereas &quot;node&quot; shows where users are coming from 
+      and &quot;n2_node&quot; shows where users are going to
+      <br />
+      <br />
+      - double click on a node to drilldown. The selection will apear as the node in the middle<br />
+      - click to drag nodes up and down<br />
+      - hover over a link to see details about the node to node relationship
+      <br /><br />
+    </html>
+    <table>
+      <title>a table for 3-node relationship</title>
+      <searchString>|inputlookup 3-node-sankey.csv | table node, n1_node, n2_node c1 c2</searchString>
+      <option name="wrap">true</option>
+    </table>
+  </row>
+  <row>
+    <html>
+      <h2>a sankey for 3-node relationship</h2>
+      <hr />
+      <div id="3nodesankey-search" 
+	    class="splunk-manager splunk-searchmanager" 
+		data-require="splunkjs/mvc/searchmanager" 
+		data-options='{                         
+		  "app": "custom_simplexml_extensions",                      
+		  "search":  {"type": "token_safe", "value": "|inputlookup 3-node-sankey.csv | search n1_node=$$node_token$$" }
+		}'/>
+      <div id="2nodesankey" 
+		class="splunk-view" 
+		data-require="app/custom_simplexml_extensions/components/sankeychart/3nodesankey" 
+		data-options='{
+	      "managerid": "3nodesankey-search",
+		  "pageField": "n1_node",
+          "prev_pageField": "node",
+          "next_pageField": "n2_node",
+		  "count1Field": "c1",
+          "count2Field": "c2",
+		  "height": 500
+		}'/>
+	<hr />
+    </html>
+</row>
+
+</form>
