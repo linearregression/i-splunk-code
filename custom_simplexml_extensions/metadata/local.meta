@@ -30,3 +30,9 @@ modtime = 1398363657.347094000
 [views/2nodesankey]
 version = 6.0.2
 modtime = 1398363816.797237000
+
+[views/3nodesankey]
+export = none
+owner = admin
+version = 6.0.2
+modtime = 1398973352.423465000
