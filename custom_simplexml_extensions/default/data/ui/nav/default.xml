@@ -4,6 +4,7 @@
    <view name="htmlcontent"/>
    <view name="paneltoggle"/>
    <view name="2nodesankey"/>
+   <view name="3nodesankey"/>
    <view name="imagepanel"/>
   </collection>
 </nav>
