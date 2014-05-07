@@ -7,5 +7,6 @@
     <view name="3nodesankey"/>
     <view name="imagepanel"/>
     <view name="brush"/>
+    <view name="chart"/>
   </collection>
 </nav>

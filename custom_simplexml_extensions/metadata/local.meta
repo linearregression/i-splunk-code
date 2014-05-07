@@ -13,7 +13,7 @@ modtime = 1398363714.787072000
 
 [nav/default]
 version = 6.0.2
-modtime = 1399054630.109456000
+modtime = 1399484227.914986000
 
 [views/paneltoggle]
 owner = admin
@@ -42,3 +42,9 @@ export = none
 owner = admin
 version = 6.0.2
 modtime = 1399317535.076857000
+
+[views/chart]
+export = none
+owner = admin
+version = 6.0.2
+modtime = 1399488157.489358000
