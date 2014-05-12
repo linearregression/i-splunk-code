@@ -1,0 +1,32 @@
+<form script="autodiscover.js">
+  <label>TableSorter</label>
+  <description>checkout: https://github.com/i-splunk/i-splunk-code</description>
+  <row>
+    <html>
+      <br />
+      This is an example implementation for TableSorter. See <a href="http://tablesorter.com/docs/">http://tablesorter.com/docs/</a> for more information
+      <br />
+    </html>
+  </row>
+<row>
+    <html>
+      <h2>a DataTable example</h2>
+      <hr />
+      <div id="tablesort-search" 
+	    class="splunk-manager splunk-searchmanager" 
+		data-require="splunkjs/mvc/searchmanager" 
+		data-options='{                         
+		  "app": "custom_simplexml_extensions",                      
+		  "search":  {"type": "token_safe", "value": "|inputlookup chart.csv  | table os version count" }
+		}'/>
+      <div id="tablesort" 
+		class="splunk-view" 
+		data-require="app/custom_simplexml_extensions/components/tablesorter/tablesort" 
+		data-options='{
+	      "managerid": "tablesort-search",
+		  "height": 300
+		}'/>
+	<hr />
+    </html>
+</row>
+</form>

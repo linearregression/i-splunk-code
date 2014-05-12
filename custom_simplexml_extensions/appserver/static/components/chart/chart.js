@@ -24,6 +24,17 @@ define(function(require, exports, module) {
 
     require("css!./chart.css");
 
+    // create map out of a collection
+    function pluck(arr, key) {
+      return $.map(arr, function(e) {
+        try {
+          return e[key];
+        } catch (e) {
+          return "na";
+      }
+      });
+    }
+
     var ChartView = SimpleSplunkView.extend({
         className: "splunk-view",
         options: {
@@ -31,14 +42,9 @@ define(function(require, exports, module) {
             data: "preview",
         },
 
+        output_mode: "json",
+
         initialize: function() {
-            _.extend(this.options, {
-                formatName: _.identity,
-                formatTitle: function(d) {
-                    return (d.source.name + ' -> ' + d.target.name +
-                            ': ' + d.value);
-                }
-            });
             SimpleSplunkView.prototype.initialize.apply(this, arguments);
 
             this.settings.enablePush("value");
@@ -57,6 +63,12 @@ define(function(require, exports, module) {
             // e.data is the this pointer passed to the callback.
             // here it refers to this object and we call render()
             e.data.render();
+        },
+
+        formatData: function(data) {
+          var field = this.settings.get('version');
+          var count = this.settings.get('count');
+          return data;
         },
 
         createView: function() {
@@ -126,6 +138,8 @@ define(function(require, exports, module) {
           var y = d3.scale.linear()
               .domain([0, height])
               .rangeRound([0, h]);
+
+          var osList = _.uniq(_.pluck(data, this.settings.get('os')));
 
           chart.selectAll("rect")
               .data(d)
