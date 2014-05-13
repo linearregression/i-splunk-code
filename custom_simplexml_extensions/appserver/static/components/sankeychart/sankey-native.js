@@ -4,7 +4,10 @@
 // just added the require statement
 //
 
-require(['app/custom_simplexml_extensions/d3.v2.min'], function (d) {
+var utils = require('splunkjs/mvc/utils');
+var app = utils.getCurrentApp();
+
+require(['app/'+app+'/components/sankeychart/d3.v2.min'], function (d) {
 d3.sankey = function() {
   var sankey = {},
       nodeWidth = 24,
