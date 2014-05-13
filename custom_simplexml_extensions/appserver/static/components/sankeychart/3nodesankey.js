@@ -47,6 +47,8 @@ define(function(require, exports, module) {
   var _ = require('underscore');
   var SimpleSplunkView = require("splunkjs/mvc/simplesplunkview");
   require("css!./sankeychart.css");
+  require("./d3.v2.min");
+  require("./sankey-native");
 
   var formatNumber = d3.format(",.0f"),
   format = function(d) { return "count = " + formatNumber(d); },
