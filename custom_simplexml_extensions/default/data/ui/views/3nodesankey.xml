@@ -1,4 +1,4 @@
-<form script="autodiscover.js, sankey-native.js">
+<form script="autodiscover.js">
   <label>3-node-sankey</label>
   <description>checkout: https://github.com/i-splunk/i-splunk-code</description>
   <fieldset autoRun="true" submitButton="false">

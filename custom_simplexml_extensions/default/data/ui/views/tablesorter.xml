@@ -4,14 +4,14 @@
   <row>
     <html>
       <br />
-      This is an example implementation for TableSorter. See <a href="http://tablesorter.com/docs/">http://tablesorter.com/docs/</a> for more information
+      This example implements the jQuery TableSorter plugin. See <a href="http://tablesorter.com/docs/">http://tablesorter.com/docs/</a> for more information
+      <br />
       <br />
     </html>
   </row>
 <row>
     <html>
       <h2>a DataTable example</h2>
-      <hr />
       <div id="tablesort-search" 
 	    class="splunk-manager splunk-searchmanager" 
 		data-require="splunkjs/mvc/searchmanager" 
@@ -26,7 +26,6 @@
 	      "managerid": "tablesort-search",
 		  "height": 300
 		}'/>
-	<hr />
     </html>
 </row>
 </form>
