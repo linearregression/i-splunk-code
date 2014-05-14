@@ -14,15 +14,23 @@
 //   limitations under the License.
 //
 
-define(function(require, exports, module) {
-    var _ = require('underscore');
-    var mvc = require('splunkjs/mvc');
+define([
+    'underscore',
+    'jquery',
+    'splunkjs/mvc/basesplunkview',
+    'splunkjs/mvc',
+    'splunkjs/mvc/simplexml/ready'
+], function(_, $, BaseSplunkView, mvc) {
+
+   // adjust the path according to your app name 
+   var expand = "expand.png"
+   var collapse = "collapse.png"
+
     require("css!./slidepanelgroup.css");
 
-    var SlidePanelView = require('splunkjs/mvc/basesplunkview').extend({
-
+    var SlidePanelView = BaseSplunkView.extend({
         events: {
-            'click .expand': function(e) {
+            'click .slideButton': function(e) {
                 var img = $(e.currentTarget);
                 var items = img.data('item');
                 _(items).each(function(id) {
@@ -33,21 +41,7 @@ define(function(require, exports, module) {
                     component.$el.resize();
                 }
                 });
-                img.attr("class", img.attr("class") == "expand" ? "collaps": "expand");
-            },
-
-            'click .collaps': function(e) {
-                var img = $(e.currentTarget);
-                var items = img.data('item');
-                _(items).each(function(id) {
-                  var component = mvc.Components.get(id);
-                  if (component) {
-                    component.$el.slideToggle(1000);
-                    // SVG panels (i.e. bubblechart) need a resize event after toggling
-                    component.$el.resize();
-                }
-                });
-                img.attr("class", img.attr("class") == "expand" ? "collaps": "expand");
+                img.attr("src", img.attr("src") == expand ? collapse: expand);
             }
         },
         render: function() {
@@ -58,15 +52,15 @@ define(function(require, exports, module) {
                 var first_panel = mvc.Components.get(items[0]);
                 var h = $('<h2></h2>');
                 var title = this.settings.get("title") || "";
-                var img = $('<div> &nbsp; </div>'); 
-                img.attr('class', "collaps");
+                var img = $('<img class="slideButton" style="float: right; padding-right: 15px; cursor: pointer" />'); 
+                img.attr('src', collapse);
                 img.attr('alt', '#' + items[0]).data('item', items);
                 img.appendTo($el);
                 h.text(title);
                 h.appendTo($el);
                 if (hide == "yes") {
                   // initially toggle elements with option hide=yes 
-                  img.attr('class', "expand");
+                  img.attr('src', expand);
                   _(items).each(function(id) {
                     var component = mvc.Components.get(id);
                     if (component) {

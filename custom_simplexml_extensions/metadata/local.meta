@@ -24,8 +24,8 @@ modtime = 1398363602.916941000
 access = read : [ * ], write : [ admin, power ]
 export = none
 owner = admin
-version = 6.0.2
-modtime = 1398363657.347094000
+version = 6.1.1
+modtime = 1400095017.940817000
 
 [views/2nodesankey]
 version = 6.1.1

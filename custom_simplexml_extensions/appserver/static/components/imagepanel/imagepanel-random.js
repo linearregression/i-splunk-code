@@ -17,6 +17,10 @@
 define(function(require, exports, module) {
     var _ = require('underscore');
     var mvc = require('splunkjs/mvc');
+
+    require("./jquery.bxslider");
+    require("css!./jquery.bxslider.css");
+
     var SimpleSplunkView = require('splunkjs/mvc/simplesplunkview');
     var ImagePanelRandom = SimpleSplunkView.extend({
         className: "imagepanelrandom",

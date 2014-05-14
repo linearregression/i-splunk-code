@@ -1,0 +1,21 @@
+
+.collaps {
+  background-image: url(collapse.png); 
+  background-repeat: no-repeat;
+  float: right;
+  padding-right: 20px;
+  cursor: pointer;
+  display: inline;
+  background-size: 90% 100% ;
+}
+
+.expand {
+  background-image: url(expand.png);
+  background-repeat: no-repeat;
+  float: right;
+  padding-right: 20px;
+  cursor: pointer;
+  margin: 0px;
+  display: inline;
+  background-size: 90% 100% ;
+}
