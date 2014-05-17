@@ -1,18 +1,22 @@
 This App provides a few SimpleMXL extensions for Splunk
 
+=== Release Notes ===
+This release improves the javascript and html image loading. 
+- All app specific code is now packed in 
+  $APP_HOME/appserver/static/components/<feature>/
+- The only javascript include statement in the xml view is the call of
+  appserver.js. All other js files will be loaded automatically
+- All static (ugly) calls to 'app_name' are removed
+
+- Additionally, this release includes the new view "TableSorter".
+  A javascript library for filtering and sorting html tables
+
+
 === Configure ===
 no custom configs for this release
 
 === Troubleshoot ===
-Some of the javascript files and XML views use static paths that include the app
-directory name. If you use these examples in your own custom Splunk apps, you
-have to adjust the paths in the appropriate files.
-
-search the static paths i.e. with following command on Linux
-#> grep -R custom_simplexml_extensions *
-
-I know, using static paths is ugly coding. But time was short and if you
-have a better solution, please let me know
+Tested with Chrome
 
 == Professional Services and Support ==
 their is no professional service and no committed support for this app
