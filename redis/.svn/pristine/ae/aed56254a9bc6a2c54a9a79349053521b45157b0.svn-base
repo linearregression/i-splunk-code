@@ -1,0 +1,5 @@
+[tcp://6002]
+connection_host = none
+index = ramidx
+sourcetype = perf
+

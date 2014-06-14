@@ -1,0 +1,13 @@
+[redisread]
+external_cmd = r_read.py
+fields_list = ip isp
+
+[rediswrite]
+external_cmd = r_write.py
+fields_list = ip isp
+
+[test]
+external_cmd = test.py
+fields_list = ip isp
+
+

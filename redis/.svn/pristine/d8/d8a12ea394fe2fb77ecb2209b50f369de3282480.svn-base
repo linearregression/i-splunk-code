@@ -1,0 +1,3 @@
+[default]
+hostname = elaborx004.pnet.ch
+port = 6379
