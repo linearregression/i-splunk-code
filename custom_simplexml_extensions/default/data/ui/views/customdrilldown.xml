@@ -1,0 +1,60 @@
+<form script="autodiscover.js">
+  <label>custom-drilldown</label>
+  <fieldset submitButton="false">
+    <input type="time" token="field1">
+      <label> select time </label>
+      <default>
+        <earliestTime>-60m@m</earliestTime>
+        <latestTime>now</latestTime>
+      </default>
+    </input>
+    <input type="dropdown" token="field2" searchWhenChanged="true">
+      <label> select group </label>
+      <populatingSearch fieldForLabel="group" fieldForValue="group">index=_internal sourcetype=splunkd  group=per_*thruput* | fields group | dedup group </populatingSearch>
+      <default>*</default>
+      <choice value="*">All</choice>
+    </input>
+  </fieldset>
+  <row grouping="1,2">
+   <html>
+     <h2> add custom drilldown links to your charts, tables, etc. </h2> <br /> 
+        <br />
+        Click the link below the chart to open the drilldown page
+        <br />
+    </html>
+      <chart>
+        <searchString>index=_internal sourcetype=splunkd  group=$field2$ | stats count(kb) by series</searchString>
+        <earliestTime>$field1.earliest$</earliestTime>
+        <latestTime>$field1.latest$</latestTime>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.enabled">false</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart">area</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">default</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">right</option>
+      </chart>
+    <html id="panel1">
+      <div id="htmlcontent"
+        class="splunk-view"
+        data-require="app/custom_simplexml_extensions/components/htmlcontent/drilldown"
+        data-options='{
+          "managerid":     "link-manager",
+           "app_name":     "cusotm_simplexml_extensions",
+           "searchstring": {"type": "token_safe", "value": "index=_internal sourcetype=splunkd  group=$$field2$$"},
+           "linkstring":   "click this link to drilldown"
+         }'/>
+    </html>
+  </row>
+</form>

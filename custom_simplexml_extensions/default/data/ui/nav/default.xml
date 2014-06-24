@@ -2,6 +2,7 @@
   <view name="search" default='true' />
   <collection label="Custom Extensions">
     <view name="htmlcontent"/>
+    <view name="customdrilldown"/>
     <view name="paneltoggle"/>
     <view name="2nodesankey"/>
     <view name="3nodesankey"/>
