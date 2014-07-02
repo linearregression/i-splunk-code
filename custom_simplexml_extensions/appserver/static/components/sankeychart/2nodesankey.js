@@ -109,7 +109,7 @@ define(function(require, exports, module) {
 
             // Here we wet up the initial view layout
             // sankey need width & height -> so define them globally
-            var margin = {top: 0, right: 0, bottom: 0, left: 0};
+            var margin = {top: 0, right: 1, bottom: 8, left: 0};
             width = parseInt(this.settings.get("width") || this.$el.width());
             height = parseInt(this.settings.get("height") || this.$el.height());
 
@@ -167,10 +167,10 @@ define(function(require, exports, module) {
             var svg1 = $(viz.svg[0]);
             svg1.empty();
 
-            var margin = {top: 0, right: 0, bottom: 20, left: 0};
-            width = this.$el.width();
-            //height = this.$el.height();
-            height = this.settings.get('height');
+            var availableWidth = parseInt(this.$el.width());
+            var availableHeight = parseInt(this.$el.height());
+            var width = availableWidth - viz.margin.left - viz.margin.right;
+            var height = availableHeight - viz.margin.top - viz.margin.bottom;
             var that = this;
 
             // adjust svg container width in case of browser windows resize

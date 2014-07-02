@@ -119,7 +119,7 @@ define(function(require, exports, module) {
     },
 
     createView: function() {
-      var margin = {top: 0, right: 0, bottom: 6, left: 0};
+      var margin = {top: 0, right: 0, bottom: 8, left: 0};
       var availableWidth = parseInt(this.settings.get("width") || this.$el.width());
       var availableHeight = parseInt(this.settings.get("height") || this.$el.height());
       var width = availableWidth - margin.left - margin.right;
