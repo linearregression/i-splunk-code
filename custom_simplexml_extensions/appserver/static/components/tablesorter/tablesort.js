@@ -18,7 +18,7 @@ define(function(require, exports, module) {
     var _ = require('underscore');
     var mvc = require('splunkjs/mvc');
     var SimpleSplunkView = require('splunkjs/mvc/simplesplunkview');
-   
+
     require("css!./css/theme.blue.css");
     //require("css!./css/theme.default.css");
     require("./js/jquery.tablesorter");
@@ -33,19 +33,21 @@ define(function(require, exports, module) {
         options: {
             managerid: null,
             data: "preview",
+            tableId: "tableId"
         },
 
         output_mode: "json",
 
         createView: function() {
             this.$el.html('');
-
             return true;
         },
 
         updateView: function(viz, data) {
             // console.log("The data object: ", data);
-            var jsonHtmlTable = ConvertJsonToTable(data, 'jsonTable', "table" , null);
+            var tableId = this.settings.get("tableId") || "";
+            var htmlTableId = "#"+tableId;
+            var jsonHtmlTable = ConvertJsonToTable(data, tableId, "table" , null);
             this.$el.html(jsonHtmlTable);
 
 var pager = ' \
@@ -68,14 +70,14 @@ var pager = ' \
 </tr> \
 ';
 
-            $("table").after(pager);
+            $(htmlTableId).after(pager);
 
 $(function(){
 
 
   // Initialize tablesorter
   // ***********************
-  $("table")
+  $(htmlTableId)
     .tablesorter({
       theme: 'blue',
       headerTemplate : '{content} {icon}', // new in v2.7. Needed to add the bootstrap icon!
@@ -123,7 +125,7 @@ $(function(){
 
 });
 
-  
+
         }
     });
     return TableView;
