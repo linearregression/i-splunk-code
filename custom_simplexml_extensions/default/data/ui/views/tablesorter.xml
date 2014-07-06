@@ -7,9 +7,15 @@
       This example implements the jQuery TableSorter plugin. See <a href="http://tablesorter.com/docs/">http://tablesorter.com/docs/</a> for more information
       <br />
       <br />
+      Some of the filter strings you can use: <br />
+      <ul>
+        <li>"!" : exclude from filter</li>
+        <li>"&lt;" : less than</li>
+        <li>"&gt;" : greater than</li>
+        <li>"=": equals </li>
+      </ul>
+      <br />
     </html>
-  </row>
-<row>
     <html>
       <h2>a DataTable example</h2>
       <div id="tablesort-search" 
@@ -24,7 +30,8 @@
 		data-require="app/custom_simplexml_extensions/components/tablesorter/tablesort" 
 		data-options='{
 	      "managerid": "tablesort-search",
-		  "height": 300
+          "tableId":   "firstTable",
+		  "height":    300
 		}'/>
     </html>
 </row>

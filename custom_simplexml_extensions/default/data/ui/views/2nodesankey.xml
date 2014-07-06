@@ -50,7 +50,7 @@
 		  "currentField": "source",
           "nextField": "target",
 		  "countField": "count",
-		  "height": 500
+		  "height": 400
 		}'/>
 	<hr />
     </html>

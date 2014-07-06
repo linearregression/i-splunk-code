@@ -1,0 +1,26 @@
+#percentage text {
+  font-weight: 400;
+  fill: #fff;
+}
+
+#sunburst {
+  position: relative;
+}
+
+#sunburst path {
+  stroke: #fff;
+}
+
+#explanation {
+  position: absolute;
+  top: center;
+  left: center;
+  text-align: left;
+  color: #666;
+  z-index: 2;
+}
+
+percentage {
+  font-size: 2.5em;
+}
+

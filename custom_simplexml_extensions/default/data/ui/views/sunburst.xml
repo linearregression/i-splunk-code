@@ -1,0 +1,45 @@
+<form script="autodiscover.js">
+  <label>sunburst sequence</label>
+  <description>checkout: https://github.com/i-splunk/i-splunk-code</description>
+  <row>
+    <html>
+      <br />
+      This is a d3.js sunburst implementation. See <a href="http://d3js.org">http://d3js.org</a> for more information about sankey implementation
+      <br />
+      <br />
+      This kind of diagram can be useful to show clickstream relationsips for web statistics.
+      <br />
+      <br />
+    </html>
+
+  </row>
+  <row>
+    <table>
+      <title>sequence table</title>
+      <searchString>|inputlookup visit-sequences.csv </searchString>
+      <option name="wrap">true</option>
+    </table>
+    <html>
+      <h2>sunburst sequence</h2>
+      <hr />
+      <div id="sunburst-search" 
+	    class="splunk-manager splunk-searchmanager" 
+		data-require="splunkjs/mvc/searchmanager" 
+		data-options='{                         
+		  "app": "custom_simplexml_extensions",                      
+		  "search":  "|inputlookup visit-sequences.csv | table path count"
+		}'/>
+      <div id="sunburst" 
+		class="splunk-view" 
+		data-require="app/custom_simplexml_extensions/components/sunburstchart/sunburst" 
+		data-options='{
+	      "managerid": "sunburst-search",
+		  "pathField": "path",
+          "count": "count",
+		  "height": 500
+		}'/>
+	<hr />
+    </html>
+</row>
+
+</form>
