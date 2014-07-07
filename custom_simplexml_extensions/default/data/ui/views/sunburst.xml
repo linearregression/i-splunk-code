@@ -8,8 +8,8 @@
       for more information about the d3.js implementation.
       <br />
       <br />
-      This kind of diagram can be useful to show a clickstream path for web statistics.<br />
-      required input for the diagram are following two Splunk fields:<br />
+      A sequence sunburst may be useful to show the clickstream path for web statistics.<br />
+      required inputs for the diagram are following two Splunk fields:<br />
       <ul>
         <li><b>path</b> (in form of a string-sequence like "node1-node2-node3-node4")</li>
         <li><b>count </b>(the sequence count)</li>
