@@ -4,10 +4,16 @@
   <row>
     <html>
       <br />
-      This is a d3.js sunburst implementation. See <a href="http://d3js.org">http://d3js.org</a> for more information about sankey implementation
+      This is a d3.js sunburst implementation. See <a href="http://bl.ocks.org/kerryrodden/7090426">http://bl.ocks.org/kerryrodden/7090426</a> 
+      for more information about the d3.js implementation.
       <br />
       <br />
-      This kind of diagram can be useful to show clickstream relationsips for web statistics.
+      This kind of diagram can be useful to show a clickstream path for web statistics.<br />
+      required input for the diagram are following two Splunk fields:<br />
+      <ul>
+        <li><b>path</b> (in form of a string-sequence like "node1-node2-node3-node4")</li>
+        <li><b>count </b>(the sequence count)</li>
+      </ul>
       <br />
       <br />
     </html>
@@ -16,7 +22,7 @@
   <row>
     <table>
       <title>sequence table</title>
-      <searchString>|inputlookup visit-sequences.csv </searchString>
+      <searchString>|inputlookup visit-sequences.csv | table path count </searchString>
       <option name="wrap">true</option>
     </table>
     <html>

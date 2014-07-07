@@ -2,6 +2,10 @@
 
 /*   Copyright 2014 by mathias herzog, <mathu at gmx dot ch>
 
+   The Code for d3.js sunburst sequece diagramm originally comes from
+   http://bl.ocks.org/kerryrodden
+   http://bl.ocks.org/kerryrodden/7090426
+
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
    You may obtain a copy of the License at
@@ -50,7 +54,7 @@ define(function(require, exports, module) {
     },
 
     createView: function() {
-      var margin = {top: 0, right: 0, bottom: 0, left: 0};
+      var margin = {top: 10, right: 0, bottom: 10, left: 0};
       var availableWidth = parseInt(this.settings.get("width") || this.$el.width());
       var availableHeight = parseInt(this.settings.get("height") || this.$el.height());
       var width = availableWidth - margin.left - margin.right;
@@ -67,7 +71,7 @@ define(function(require, exports, module) {
         .attr("height", height)
         .append("svg:g")
         .attr("id", "container")
-        //.attr("transform", "translate(" + width / 2 + "," + height / 2  + 200 +  ")");
+        .attr("transform", "translate(" + width / 2 + "," + height / 2   +  ")");
 
       // initialize breadccrump trail
       // Add the svg area.
@@ -75,10 +79,6 @@ define(function(require, exports, module) {
           .attr("width", width)
           .attr("height", 30)
           .attr("id", "trail");
-      // Add the label at the end, for the percentage.
-      //trail.append("svg:text")
-      //  .attr("id", "endlabel")
-      //  .style("fill", "#000");
 
       // The returned object gets passed to updateView as viz
       return { container: this.$el, svg: svg, margin: margin};
@@ -103,6 +103,12 @@ define(function(require, exports, module) {
       var height = availableHeight - viz.margin.top - viz.margin.bottom;
       var radius = Math.min(width, height) / 2 - 30;
 
+      // adjust svg container width in case of browser windows resize
+      var svg_container = d3.selectAll("svg")
+        // follwoing line does not work, tell me why
+        //.attr("height", availableHeight)
+        .attr("width", availableWidth)
+
       var partition = d3.layout.partition()
         .size([2 * Math.PI, radius * radius])
         .value(function(d) { return d.size; });
@@ -124,7 +130,7 @@ define(function(require, exports, module) {
       // Main function to draw and set up the visualization, once we have the data.
       function createVisualization(json) {
 
-        // TODO: enable and move to create View
+        // TODO: enable and move to createView
         // drawLegend();
         d3.select("#togglelegend").on("click", toggleLegend);
 
@@ -146,7 +152,6 @@ define(function(require, exports, module) {
             .attr("display", function(d) { return d.depth ? null : "none"; })
             .attr("d", arc)
             .attr("fill-rule", "evenodd")
-            //.style("fill", function(d) { return colors[d.name]; })
             .style("fill", function(d) { return color(d.name); })
             .style("opacity", 1)
             .on("mouseover", mouseover);
